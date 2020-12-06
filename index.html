@@ -2,9 +2,12 @@
 	<head>
 		<title>Screen Resolution</title>
 		<meta charset="utf-8" />
-		<meta content="width=device-width,initial-scale=1" name="viewport" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="viewport" content="user-scalable=no, width=device-width" />
+		<meta name="viewport" content="minimum-scale=1.0,width=device-width,maximum-scale=1,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="google" content="notranslate" />
-		<meta name="google" value="notranslate" />
 		<style>
 			body {text-align:center;font-family:arial;font-size:24px;padding:20px} span {color:#AAAAAA}
 			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} span {color:#4C4C4C}}
@@ -24,7 +27,7 @@
 			params = {
 				'Inner Width'	: window.innerWidth,				
 				'Inner Height'	: window.innerHeight,
-				'Ratio'			: getRatio(screen.width,screen.height),
+				'Ratio'		: getRatio(screen.width,screen.height),
 				'User Agent'	: navigator.userAgent
 			}
 			for(i in params){
