@@ -9,8 +9,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="google" content="notranslate" />
 		<style>
-			body {text-align:center;font-family:arial;font-size:10px;padding:5px} span {color:#AAAAAA}
-			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} span {color:#4C4C4C}}
+			body {text-align:center;font-family:arial;font-size:10px;padding:4px} .label {background-color:#EEEEEE}
+			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} .label {background-color:#5D5D5D}}
 		</style>
 	</head>
 	<body>
@@ -31,20 +31,22 @@
 				'Screen Avail Height'	: screen.availHeight,
 				'Screen Color Depth'	: screen.colorDepth,
 				'Screen Pixel Depth'	: screen.pixelDepth,
+				'Body Client Width'	: document.body.clientWidth,
+				'Body Client Height'	: document.body.clientHeight,
+				'Body Offset Width'	: document.body.offsetWidth,
+				'Body Offset Height'	: document.body.offsetHeight,
 				'Window Inner Width'	: window.innerWidth,
 				'Window Inner Height'	: window.innerHeight,
 				'Window Outer Width'	: window.outerWidth,
 				'Window Outer Height'	: window.outerHeight,
-				'Body Client Width'	: document.body.clientWidth,
-				'Body Client Height'	: document.body.clientHeight,
 				'Ratio'			: getRatio(screen.width,screen.height),
 				'User Agent'		: navigator.userAgent
 			},
-			str = "<table cellpadding=5>";
+			str = "<table cellpadding='5' cellspacing='5' width='100%'>";
 			for(i in params){
-				str = str + '<tr><td valign=top width=55%>'+i+'</td><td>' + params[i] + '</td></tr>';
+				str = str + "<tr><td valign='top' width='60%' class='label'>" + i + "</td><td>" + params[i] + "</td></tr>";
 			}
-			str = str + '</table>';
+			str = str + "</table>";
 
 			document.write(str);
 		</script>
