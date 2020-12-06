@@ -10,10 +10,14 @@
 		<meta name="google" content="notranslate" />
 		<style>
 			body {text-align:center;font-family:arial;font-size:10px;padding:4px} .label {background-color:#EEEEEE}
+			div {width:1000px;margin:0 auto}
 			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} .label {background-color:#5D5D5D}}
+			@media (max-width: 1000px) { div {width:100%;margin:0} }
+			@media (min-width: 1000px) { table tr td {font-size:24px} }
 		</style>
 	</head>
 	<body>
+		<div>
 		<script>
 			var getRatio = function(num1, num2){
 				for(i = num2; i > 1; i--) {
@@ -44,3 +48,4 @@
 
 			document.write(str);
 		</script>
+		</div>
