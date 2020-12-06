@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width,initial-scale=1" name="viewport" />
+		<style>
+			body {text-align:center;font-family:arial;font-size:24px;padding:20px} span {color:#AAAAAA}
+			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} span {color:#4C4C4C}}
+		</style>
+	</head>
+	<body>
+		<script>
+			var params = {
+				'Inner Width'	: window.innerWidth,				
+				'Inner Height'	: window.innerHeight,
+				'User Agent'	: navigator.userAgent
+			}
+			for(i in params){
+				document.write('<span>'+i+'</span><br />' + params[i] + '<br /><br />');
+			}
+		</script>
