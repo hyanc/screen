@@ -12,9 +12,19 @@
 	</head>
 	<body>
 		<script>
-			var params = {
+			var getRatio = function(num1, num2){
+				for(i = num2; i > 1; i--) {
+					if((num1 % i) == 0 && (num2 % i) == 0) {
+						num1 = num1 / i;
+						num2 = num2 / i;
+					}
+				}
+				return(num1 + ':' + num2);
+			},
+			params = {
 				'Inner Width'	: window.innerWidth,				
 				'Inner Height'	: window.innerHeight,
+				'Ratio'			: getRatio(screen.width,screen.height),
 				'User Agent'	: navigator.userAgent
 			}
 			for(i in params){
