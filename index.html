@@ -25,21 +25,15 @@
 				return(num1 + ':' + num2);
 			},
 			params = {
-				'Screen Width'		: screen.width,
-				'Screen Height'		: screen.height,
-				'Screen Avail Width'	: screen.availWidth,
-				'Screen Avail Height'	: screen.availHeight,
+				'Screen WH'		: screen.width + ' x ' + screen.height,
+				'Screen Avail WH'	: screen.availWidth + ' x ' + screen.availHeight,
+				'Body Client WH'	: document.body.clientWidth + ' x ' + document.body.clientHeight,
+				'Body Offset WH'	: document.body.offsetWidth + ' x ' + document.body.offsetHeight,
+				'Window Inner WH'	: window.innerWidth + ' x ' + window.innerHeight,
+				'Window Outer WH'	: window.outerWidth + ' x ' + window.outerHeight,
+				'Ratio'			: getRatio(screen.width,screen.height),
 				'Screen Color Depth'	: screen.colorDepth,
 				'Screen Pixel Depth'	: screen.pixelDepth,
-				'Body Client Width'	: document.body.clientWidth,
-				'Body Client Height'	: document.body.clientHeight,
-				'Body Offset Width'	: document.body.offsetWidth,
-				'Body Offset Height'	: document.body.offsetHeight,
-				'Window Inner Width'	: window.innerWidth,
-				'Window Inner Height'	: window.innerHeight,
-				'Window Outer Width'	: window.outerWidth,
-				'Window Outer Height'	: window.outerHeight,
-				'Ratio'			: getRatio(screen.width,screen.height),
 				'User Agent'		: navigator.userAgent
 			},
 			str = "<table cellpadding='5' cellspacing='5' width='100%'>";
