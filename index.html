@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Screen Resolution</title>
+		<title>Screen</title>
 		<meta charset="utf-8" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -19,25 +19,36 @@
 	<body>
 		<div>
 		<script>
-			var getRatio = function(num1, num2){
-				for(i = num2; i > 1; i--) {
-					if((num1 % i) == 0 && (num2 % i) == 0) {
-						num1 = num1 / i;
-						num2 = num2 / i;
+			var standard = ['4:3','5:4','16:9','16:10','18.5:9','19.5:9'],
+			width = screen.width, height = screen.height,
+			aspectRatio = function(){
+				var result = 'Unknown', wh = (width + ':' + height).split(':');
+				wh.sort(function (a,b) {return b-a;});
+				for(i in standard){
+					var std = standard[i].split(':'), test = (std[1] * wh[0])/wh[1];
+					if(test == std[0]) {
+						result = standard[i];
+						break;
 					}
+					else if(Math.round(test) == std[0] || parseFloat(test).toFixed(1) == std[0]) {
+						result = standard[i] + ' (Approx)';
+						break;
+					}
+					ratio = standard[i].split(':');
 				}
-				return(num1 + ':' + num2);
+				return result;
 			},
 			params = {
-				'Screen WH'		: screen.width + ' x ' + screen.height,
-				'Screen Avail WH'	: screen.availWidth + ' x ' + screen.availHeight,
-				'Body Client WH'	: document.body.clientWidth + ' x ' + document.body.clientHeight,
-				'Body Offset WH'	: document.body.offsetWidth + ' x ' + document.body.offsetHeight,
-				'Window Inner WH'	: window.innerWidth + ' x ' + window.innerHeight,
-				'Window Outer WH'	: window.outerWidth + ' x ' + window.outerHeight,
-				'Ratio'			: getRatio(screen.width,screen.height),
-				'Screen Color Depth'	: screen.colorDepth,
-				'Screen Pixel Depth'	: screen.pixelDepth,
+				'Width x Height'		: '<b>' + screen.width + ' x ' + screen.height + '</b>',
+				'Aspect Ratio'			: aspectRatio().replace(':',' : '),
+				'Orientation'		: screen.width==screen.height?'Square':(screen.width>screen.height?'Landscape':'Portrait'),
+				'Color Depth'	: screen.colorDepth + ' bit',
+				'Pixel Depth'	: screen.pixelDepth + ' bit',
+				'Available'	: screen.availWidth + ' x ' + screen.availHeight,
+				'Body Client'	: document.body.clientWidth + ' x ' + document.body.clientHeight,
+				'Body Offset'	: document.body.offsetWidth + ' x ' + document.body.offsetHeight,
+				'Window Inner'	: window.innerWidth + ' x ' + window.innerHeight,
+				'Window Outer'	: window.outerWidth + ' x ' + window.outerHeight,
 				'User Agent'		: navigator.userAgent
 			},
 			str = "<table cellpadding='5' cellspacing='5' width='100%'>";
