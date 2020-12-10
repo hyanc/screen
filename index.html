@@ -39,9 +39,9 @@
 				return result;
 			},
 			params = {
-				'Width x Height'		: '<b>' + screen.width + ' x ' + screen.height + '</b>',
-				'Aspect Ratio'			: aspectRatio().replace(':',' : '),
-				'Orientation'		: screen.width==screen.height?'Square':(screen.width>screen.height?'Landscape':'Portrait'),
+				'Width Height'	: '<b>' + screen.width + ' x ' + screen.height + '</b>',
+				'Aspect Ratio'	: aspectRatio().replace(':',' : '),
+				'Orientation'	: screen.width==screen.height?'Square':(screen.width>screen.height?'Landscape':'Portrait'),
 				'Color Depth'	: screen.colorDepth + ' bit',
 				'Pixel Depth'	: screen.pixelDepth + ' bit',
 				'Available'	: screen.availWidth + ' x ' + screen.availHeight,
@@ -49,7 +49,7 @@
 				'Body Offset'	: document.body.offsetWidth + ' x ' + document.body.offsetHeight,
 				'Window Inner'	: window.innerWidth + ' x ' + window.innerHeight,
 				'Window Outer'	: window.outerWidth + ' x ' + window.outerHeight,
-				'User Agent'		: navigator.userAgent
+				'User Agent'	: navigator.userAgent
 			},
 			str = "<table cellpadding='5' cellspacing='5' width='100%'>";
 			for(i in params){
