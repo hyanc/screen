@@ -2,14 +2,9 @@
 	<head>
 		<title>Screen</title>
 		<meta charset="utf-8" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-		<meta name="viewport" content="user-scalable=no, width=device-width" />
-		<meta name="viewport" content="minimum-scale=1.0,width=device-width,maximum-scale=1,user-scalable=no" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="google" content="notranslate" />
 		<style>
-			body {text-align:center;font-family:arial;font-size:10px;padding:4px} .label {background-color:#EEEEEE}
+			body {text-align:center;font-family:arial;font-size:20px;padding:4px} .label {background-color:#EEEEEE}
 			div {width:1000px;margin:0 auto}
 			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} .label {background-color:#5D5D5D}}
 			@media (max-width: 1000px) { div {width:100%;margin:0} }
@@ -84,7 +79,7 @@
 				'Width Height'	: '<b>' + screen.width + ' x ' + screen.height + '</b>',
 				'Res Name'	: resolutions[screen.width>screen.height?wh.join(':'):(height + ':' + width)] || 'Unknown',
 				'Aspect Ratio'	: aspectRatio().replace(':',' : '),
-				'Orientation'	: screen.width==screen.height?'Square':(screen.width>screen.height?'Landscape':'Portrait'),
+				'Orientation'	: window.matchMedia("(orientation: portrait)").matches?'Portrait':'Landscape',
 				'Color Depth'	: screen.colorDepth + ' bit',
 				'Pixel Depth'	: screen.pixelDepth + ' bit',
 				'Available'	: screen.availWidth + ' x ' + screen.availHeight,
@@ -94,10 +89,10 @@
 				'Window Outer'	: window.outerWidth + ' x ' + window.outerHeight,
 				'User Agent'	: navigator.userAgent
 			},
-			str = "<table cellpadding='5' cellspacing='5' width='100%'>";
+			str = "<table cellpadding='10' cellspacing='5' width='100%' style='font-size:40px'>";
 			for(i in params){
 				if(i == 'Res Name' && params[i] == 'Unknown') continue;
-				str = str + "<tr><td valign='top' width='60%' class='label'>" + i + "</td><td>" + params[i] + "</td></tr>";
+				str = str + "<tr><td valign='top' width='50%' class='label'>" + i + "</td><td>" + params[i] + "</td></tr>";
 				
 			}
 			str = str + "</table>";
