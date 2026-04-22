@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>Screen</title>
 		<meta charset="utf-8" />
@@ -8,12 +9,28 @@
 			div {width:1000px;margin:0 auto}
 			@media (prefers-color-scheme: dark) {body{background-color:#303131;color:#BBBBBB} .label {background-color:#5D5D5D}}
 			@media (max-width: 1000px) { div {width:100%;margin:0;} table tr td {font-size:40px} }
-			@media (min-width: 1000px) { table tr td {font-size:20px} }
+			@media (min-width: 1000px) { table tr td {font-size:2vh} }
 		</style>
 	</head>
 	<body>
 		<div>
 		<script>
+			const getMediaValue = (feature, values) => {
+				for (let val of values) {
+					if (window.matchMedia(`(${feature}: ${val})`).matches) return val;
+				}
+				return "not supported";
+			};
+			const interaction = {
+				'Primary Pointer': getMediaValue('pointer', ['fine', 'coarse', 'none']),
+				'Any Pointer': getMediaValue('any-pointer', ['fine', 'coarse', 'none']),
+				'Primary Hover': getMediaValue('hover', ['hover', 'none']),
+				'Any Hover': getMediaValue('any-hover', ['hover', 'none'])
+			};
+			const touchSpecs = {
+				"Max Touch Points": navigator.maxTouchPoints || 0,
+				"Touch Event Support": ('ontouchstart' in window) ? "Yes" : "No",
+			};
 			var ratios = ['4:3','5:4','16:9','16:10','18.5:9','19.5:9'],
 			resolutions = {
 				'7680:4320'	:'8K',
@@ -76,27 +93,37 @@
 				return result;
 			},
 			params = {
-				'Width Height'	: '<b>' + screen.width + ' x ' + screen.height + '</b>',
-				'Res Name'	: resolutions[screen.width>screen.height?wh.join(':'):(height + ':' + width)] || 'Unknown',
-				'Aspect Ratio'	: aspectRatio().replace(':',' : '),
-				'Orientation'	: window.matchMedia("(orientation: portrait)").matches?'Portrait':'Landscape',
-				'Color Depth'	: screen.colorDepth + ' bit',
-				'Pixel Depth'	: screen.pixelDepth + ' bit',
-				'Available'	: screen.availWidth + ' x ' + screen.availHeight,
-				'Body Client'	: document.body.clientWidth + ' x ' + document.body.clientHeight,
-				'Body Offset'	: document.body.offsetWidth + ' x ' + document.body.offsetHeight,
-				'Window Inner'	: window.innerWidth + ' x ' + window.innerHeight,
-				'Window Outer'	: window.outerWidth + ' x ' + window.outerHeight,
-				'User Agent'	: navigator.userAgent
+				'Width Height'		: '<b>' + screen.width + ' x ' + screen.height + '</b>',
+				'Res Name'		: resolutions[screen.width>screen.height?wh.join(':'):(height + ':' + width)] || 'Unknown',
+				'Aspect Ratio'		: aspectRatio(),
+				'Orientation'		: window.matchMedia("(orientation: portrait)").matches?'Portrait':'Landscape',
+				'Color & Pixel Depth'	: screen.colorDepth + ' bit; ' + screen.pixelDepth + ' bit',
+				'Available'		: screen.availWidth + ' x ' + screen.availHeight,
+				'Body Client & Offset'	: document.body.clientWidth + ' x ' + document.body.clientHeight + '; '+document.body.offsetWidth + ' x ' + document.body.offsetHeight,
+				'Window Inner & Outer'	: window.innerWidth + ' x ' + window.innerHeight + '; ' + window.outerWidth + ' x ' + window.outerHeight,
+				'Primary Pointer'	: getMediaValue('pointer', ['fine', 'coarse', 'none']),
+				'Any Pointer'		: getMediaValue('any-pointer', ['fine', 'coarse', 'none']),
+				'Primary Hover'		: getMediaValue('hover', ['hover', 'none']),
+				'Any Hover'		: getMediaValue('any-hover', ['hover', 'none']),
+				'Max Touch Points'	: navigator.maxTouchPoints?'Yes':'No',
+				'Ontouchstart'		: ('ontouchstart' in window) ? 'Yes' : 'No',
+				'Actual Input Type'	: 'Please touch the screen',
+				'User Agent'		: navigator.userAgent
 			},
 			str = "<table cellpadding='10' cellspacing='5' width='100%'>";
 			for(i in params){
 				if(i == 'Res Name' && params[i] == 'Unknown') continue;
-				str = str + "<tr><td valign='top' width='50%' class='label'>" + i + "</td><td>" + params[i] + "</td></tr>";
+				str = str + "<tr><td valign='top' align='right' width='50%' class='label'>" + i + "</td><td align='left'>" + params[i] + "</td></tr>";
 				
 			}
 			str = str + "</table>";
-
 			document.write(str);
+			window.addEventListener('pointerdown', (e) => {
+				[...document.querySelectorAll('table tr td')].forEach(td=>{
+					if(td.innerText==='Please touch the screen'){
+						td.innerText = e.pointerType.toUpperCase();
+					}
+				});
+			});
 		</script>
-		</div>
+		</div><!--
